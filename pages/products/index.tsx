@@ -1,6 +1,6 @@
 import { InferGetStaticPropsType } from "next";
-import { StoreApiResponse } from "../types";
-import { Product } from "../components/Product";
+import { StoreApiResponse } from "../../types";
+import { ProductListItem } from "../../components/Product";
 
 const ProductsPage = ({
   data,
@@ -8,15 +8,18 @@ const ProductsPage = ({
   return (
     <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
       {data?.map((product) => {
-        return <li key={product.id} className="shadow-xl border-2">
-            <Product data={{
+        return (
+          <li key={product.id} className="shadow-xl border-2">
+            <ProductListItem
+              data={{
+                id: product.id,
                 title: product.title,
-                description: product.description,
                 thumbnailUrl: product.image,
                 thumbnailAlt: product.title,
-                rating: product.rating.rate
-            }}/>
-        </li>;
+              }}
+            />
+          </li>
+        );
       })}
     </ul>
   );
