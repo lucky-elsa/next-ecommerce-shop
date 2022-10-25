@@ -27,7 +27,7 @@ export const Header = () => {
         <button>
               <a>
                 <Image
-                  className="rounded-full"
+                  className="rounded-full hover:animate-bounce"
                   src="/assets/icons/basket.svg"
                   alt="Profile"
                   width="30"
@@ -39,7 +39,7 @@ export const Header = () => {
             <button>
               <a>
                 <Image
-                  className="rounded-full"
+                  className="rounded-full hover:animate-bounce"
                   src="/assets/icons/heart.svg"
                   alt="Profile"
                   width="30"
