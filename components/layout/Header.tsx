@@ -13,14 +13,14 @@ export const Header = () => {
           layout="intrinsic"
         />
         <div className="flex justify-items-center items-center gap-10">
-          <Link href="">
+        <Link href="/">
+            <a>Home</a>
+          </Link>
+          <Link href="/products">
             <a>Products</a>
           </Link>
-          <Link href="">
+          <Link href="/about">
             <a>About</a>
-          </Link>
-          <Link href="">
-            <a>Blog</a>
           </Link>
         </div>
         <div className="flex justify-items-center items-center gap-4">
