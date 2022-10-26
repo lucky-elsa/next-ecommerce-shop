@@ -1,9 +1,17 @@
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 export const Header = () => {
+  const router = useRouter();
+  const navLinks = [
+    { label: "Home", href: "/" },
+    { label: "Products", href: "/products" },
+    { label: "About", href: "/about" },
+  ];
+
   return (
-    <header className="max-w mx-auto w-full h-16 flex justify-center content-center">
+    <header className="max-w mx-auto w-full h-16 flex justify-center content-center bg-color-secondary">
       <nav className="max-w mx-auto w-full flex justify-between content-center gap-2 p-2 px-8 border-b border-gray-300">
         <Image
           src="/assets/common/logo-dark.svg"
@@ -13,30 +21,35 @@ export const Header = () => {
           layout="intrinsic"
         />
         <div className="flex justify-items-center items-center gap-10">
-        <Link href="/">
-            <a>Home</a>
-          </Link>
-          <Link href="/products">
-            <a>Products</a>
-          </Link>
-          <Link href="/about">
-            <a>About</a>
-          </Link>
+          {navLinks.map((link) => (
+            <Link key={link.href} href={link.href}>
+              <a
+                className={
+                  router.asPath === link.href
+                    ? "border-b-2 border-white"
+                    : ""
+                }
+              >
+                {link.label}
+              </a>
+            </Link>
+          ))}
         </div>
         <div className="flex justify-items-center items-center gap-4">
-        <button>
-              <a>
-                <Image
-                  className="rounded-full hover:animate-bounce"
-                  src="/assets/icons/basket.svg"
-                  alt="Profile"
-                  width="30"
-                  height="30"
-                />
-              </a>
-            </button>
+        <Link href="">
+            <a>
+              <Image
+                className="rounded-full hover:animate-bounce"
+                src="/assets/icons/basket.svg"
+                alt="Profile"
+                width="30"
+                height="30"
+                layout="intrinsic"
+              />
+            </a>
+          </Link>
           <Link href="">
-            <button>
+
               <a>
                 <Image
                   className="rounded-full hover:animate-bounce"
@@ -44,12 +57,12 @@ export const Header = () => {
                   alt="Profile"
                   width="30"
                   height="30"
+                  layout="intrinsic"
                 />
               </a>
-            </button>
           </Link>
           <Link href="">
-            <button>
+
               <a>
                 <Image
                   className="rounded-full"
@@ -57,9 +70,9 @@ export const Header = () => {
                   alt="Profile"
                   width="30"
                   height="30"
+                  layout="intrinsic"
                 />
               </a>
-            </button>
           </Link>
         </div>
       </nav>
