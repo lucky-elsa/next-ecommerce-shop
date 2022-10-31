@@ -1,5 +1,4 @@
-import { GetStaticPropsContext, GetStaticPathsResult, InferGetStaticPropsType } from "next";
-import { useRouter } from "next/router";
+import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import { ProductDetails } from "../../components/Product";
 import { StoreApiResponse } from "../../types";
 import Link from "next/link";
@@ -7,7 +6,6 @@ import Link from "next/link";
 const ProductIdPage = ({
   data,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const router = useRouter();
   if (!data) {
     return <div>Something went wrong...</div>;
   }

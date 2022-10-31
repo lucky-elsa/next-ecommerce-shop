@@ -18,7 +18,6 @@ interface ProductApiResponse {
 
 const PaginationTask1 = () => {
   const [page, setPage] = useState(1);
-  console.log(page);
 
   const fetchProducts = async (page: number) => {
     const offset = (page - 1) * 25;
