@@ -17,14 +17,19 @@ interface ProductApiResponse {
   longDescription: string;
 }
 
+const pages = Array.from({ length: 10 }, (_, i) => i + 1);
+
 const PaginationTask2 = ({
   data,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
     const router = useRouter();
-    const pages = Array.from({ length: 10 }, (_, i) => i + 1);
 
   if (!data) {
     return <div>Something went wrong...</div>;
+  }
+
+  if (router.isFallback) {
+    return <div>Loading...</div>
   }
 
   return (
@@ -71,14 +76,21 @@ export const getStaticPaths = async () => {
   const data: ProductApiResponse[] = await res.json();
 
   return {
-    paths: data.map((product) => {
+    // paths: data.map((product) => {
+    //   return {
+    //     params: {
+    //       pageId: product.id.toString(),
+    //     },
+    //   };
+    // }),
+    paths: pages.map((page) => {
       return {
         params: {
-          pageId: product.id.toString(),
+          pageId: page.toString(),
         },
       };
     }),
-    fallback: false,
+    fallback: "blocking",
   };
 };
 
