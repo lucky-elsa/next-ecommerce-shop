@@ -43,6 +43,9 @@ export const ProductDetails = ({ data }: ProductProps) => {
                 if (!href) {
                   return <a {...props}></a>;
                 }
+                if (href.includes("http")) {
+                  return <a href={href} {...props} rel="noopener noreferrer"></a>;
+                }
                 return (
                   <Link href={href}>
                     <a {...props}></a>
