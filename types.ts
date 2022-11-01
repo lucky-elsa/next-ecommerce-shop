@@ -9,6 +9,7 @@ export interface StoreApiResponse {
     rate: number;
     count: number;
   };
+  longDescription: string;
 }
 
 export interface ProductDetails {
@@ -18,6 +19,7 @@ export interface ProductDetails {
   thumbnailUrl: string;
   thumbnailAlt: string;
   rating: number;
+  longDescription: string;
 }
 
 export interface ProductProps {

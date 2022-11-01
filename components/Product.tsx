@@ -2,6 +2,7 @@ import { Rating } from "./Rating";
 import { ProductProps, ProductListItemProps } from "../types";
 import Link from "next/link";
 import Image from "next/image";
+import ReactMarkdown from 'react-markdown'
 
 export const ProductDetails = ({ data }: ProductProps) => {
   return (
@@ -16,6 +17,9 @@ export const ProductDetails = ({ data }: ProductProps) => {
       />
       <h2 className="p-4 text-3xl font-bold">{data.title}</h2>
       <p className="p-4">{data.description}</p>
+      <article className="p-4 prose lg:prose-xl">
+      <ReactMarkdown className="p-4">{data.longDescription}</ReactMarkdown>
+      </article>
       <Rating rating={data.rating} />
     </>
   );
