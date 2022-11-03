@@ -76,10 +76,10 @@ export const getStaticPaths = async () => {
   const data: ProductApiResponse[] = await res.json();
 
   return {
-    paths: data.map((product) => {
+    paths: pages.map((page) => {
       return {
         params: {
-          pageId: product.id.toString(),
+          pageId: page.toString(),
         },
       };
     }),
