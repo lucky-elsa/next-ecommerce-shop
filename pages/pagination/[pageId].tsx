@@ -100,6 +100,13 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
   );
   const data: ProductApiResponse[] | null = await res.json();
 
+  if (!data) {
+    return {
+      props: {},
+      notFound: true
+    }
+  };
+
   return {
     props: {
       data,
