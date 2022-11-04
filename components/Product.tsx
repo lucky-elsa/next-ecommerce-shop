@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { NextSeo } from "next-seo";
 import { MDXRemote } from "next-mdx-remote";
+import { checkIfExternalURL } from "@/utils/checkIfExternalURL";
 
 export const ProductDetails = ({ data }: ProductProps) => {
   return (
@@ -43,8 +44,10 @@ export const ProductDetails = ({ data }: ProductProps) => {
                 if (!href) {
                   return <a {...props}></a>;
                 }
-                if (href.includes("http")) {
-                  return <a href={href} {...props} rel="noopener noreferrer"></a>;
+                if (checkIfExternalURL(href)) {
+                  return (
+                    <a href={href} {...props} rel="noopener noreferrer" target="_blank"></a>
+                  );
                 }
                 return (
                   <Link href={href}>
