@@ -1,39 +1,30 @@
 import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import Link from "next/link";
+import { ProductApiResponse } from "types";
 import { ProductListItem } from "@/components/Product";
+import { fetchProducts } from "services/api/fetchProducts";
+import { countProducts } from "services/api/countProducts";
 import { useRouter } from "next/router";
-
-interface ProductApiResponse {
-  id: number;
-  title: string;
-  price: number;
-  description: string;
-  category: string;
-  rating: {
-    rate: number;
-    count: number;
-  };
-  image: string;
-  longDescription: string;
-}
 
 const pages = Array.from({ length: 10 }, (_, i) => i + 1);
 
 const PaginationTask2 = ({
   data,
+  productsCount,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-    const router = useRouter();
+  const router = useRouter();
 
   if (!data) {
     return <div>Something went wrong...</div>;
   }
 
   if (router.isFallback) {
-    return <div>Loading...</div>
+    return <div>Loading...</div>;
   }
 
   return (
     <div>
+      <h2 className="font-bold">{productsCount && productsCount}</h2>
       <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 bg-gray-100 my-10">
         {data?.map((product: ProductApiResponse) => (
           <li key={product.id} className="shadow-xl border-2">
@@ -71,10 +62,7 @@ const PaginationTask2 = ({
 
 export default PaginationTask2;
 
-export const getStaticPaths = async () => {
-  const res = await fetch(`https://fakestoreapi.com/products/`);
-  const data: ProductApiResponse[] = await res.json();
-
+export const getStaticPaths = () => {
   return {
     paths: pages.map((page) => {
       return {
@@ -94,22 +82,22 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
       notFound: true,
     };
   }
-  const offset = (Number(params.pageId) - 1) * 25;
-  const res = await fetch(
-    `https://naszsklep-api.vercel.app/api/products/?take=25&offset=${offset}`
-  );
-  const data: ProductApiResponse[] | null = await res.json();
+  const take = 25;
+  const offset = (Number(params.pageId) - 1) * take;
+  const data = await fetchProducts(take, offset);
+  const productsCount = await countProducts();
 
   if (!data) {
     return {
       props: {},
-      notFound: true
-    }
-  };
+      notFound: true,
+    };
+  }
 
   return {
     props: {
       data,
+      productsCount,
     },
   };
 };

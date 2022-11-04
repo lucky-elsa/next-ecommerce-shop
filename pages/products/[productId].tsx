@@ -1,8 +1,8 @@
 import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import { ProductDetails } from "../../components/Product";
-import { StoreApiResponse } from "../../types";
+import { ProductApiResponse } from "../../types";
 import Link from "next/link";
-import { serialize } from 'next-mdx-remote/serialize'
+import { serialize } from "next-mdx-remote/serialize";
 
 const ProductIdPage = ({
   data,
@@ -13,18 +13,20 @@ const ProductIdPage = ({
 
   return (
     <div>
-      <Link href="/products"><a>Return to all products</a></Link>
-    <ProductDetails
-      data={{
-        id: data.id,
-        title: data.title,
-        thumbnailUrl: data.image,
-        thumbnailAlt: data.title,
-        description: data.description,
-        rating: data.rating.rate,
-        longDescription: data.longDescription
-      }}
-    />
+      <Link href="/products">
+        <a>Return to all products</a>
+      </Link>
+      <ProductDetails
+        data={{
+          id: data.id,
+          title: data.title,
+          thumbnailUrl: data.image,
+          thumbnailAlt: data.title,
+          description: data.description,
+          rating: data.rating.rate,
+          longDescription: data.longDescription,
+        }}
+      />
     </div>
   );
 };
@@ -39,23 +41,21 @@ export type InferGetStaticPathsType<T> = T extends () => Promise<{
 
 export const getStaticPaths = async () => {
   const res = await fetch(`https://naszsklep-api.vercel.app/api/products/`);
-  const data: StoreApiResponse[] = await res.json();
+  const data: ProductApiResponse[] = await res.json();
 
   return {
-    paths: data.map(product => {
+    paths: data.map((product) => {
       return {
         params: {
           productId: product.id.toString(),
-        }
+        },
       };
     }),
     fallback: false,
-  }
-}
+  };
+};
 
-export const getStaticProps = async ({
-  params,
-}: GetStaticPropsContext) => {
+export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
   if (!params?.productId) {
     return {
       props: {},
@@ -65,20 +65,20 @@ export const getStaticProps = async ({
   const res = await fetch(
     `https://naszsklep-api.vercel.app/api/products/${params.productId}`
   );
-  const data: StoreApiResponse | null = await res.json();
+  const data: ProductApiResponse | null = await res.json();
 
   if (!data) {
     return {
       props: {},
-      notFound: true
-    }
-  };
+      notFound: true,
+    };
+  }
 
   return {
     props: {
       data: {
         ...data,
-        longDescription: await serialize(data.longDescription)
+        longDescription: await serialize(data.longDescription),
       },
     },
   };

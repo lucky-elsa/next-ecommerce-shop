@@ -1,6 +1,6 @@
 import { MDXRemoteSerializeResult } from "next-mdx-remote";
 
-export interface StoreApiResponse {
+export interface ProductApiResponse {
   id: number;
   title: string;
   price: number;
@@ -14,7 +14,10 @@ export interface StoreApiResponse {
   longDescription: string;
 }
 
-export type MarkdownResult = MDXRemoteSerializeResult<Record<string, unknown>, Record<string, string>>;
+export type MarkdownResult = MDXRemoteSerializeResult<
+  Record<string, unknown>,
+  Record<string, string>
+>;
 
 export interface ProductDetails {
   id: number;
