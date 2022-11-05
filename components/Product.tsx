@@ -87,11 +87,11 @@ export const ProductListItem = ({ data }: ProductListItemProps) => {
       </div>
       <Link href={`/products/${data.id}`}>
         <a>
-          <h2 className="m-4 text-3xl font-bold">{data.title}</h2>
+          <h2 className="m-4 text-2xl font-bold">{data.title}</h2>
         </a>
       </Link>
       <button
-        className="m-4 bg-transparent hover:bg-color-secondary text-blue-900 font-semibold hover:text-white py-2 px-4 border border-color-secondary hover:border-transparent rounded"
+        className="m-4 bg-transparent hover:bg-color-secondary text-color-primary font-semibold hover:text-white py-2 px-4 border border-color-secondary hover:border-transparent rounded"
         onClick={() =>
           cartState.addItemToCart({ id: data.id, price: 21.3, title: data.title, count: 1 })
         }

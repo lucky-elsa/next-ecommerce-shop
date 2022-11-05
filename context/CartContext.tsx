@@ -1,5 +1,15 @@
-import { createContext, ReactNode, useState, useContext } from "react";
+import {
+  createContext,
+  ReactNode,
+  useState,
+  useContext,
+  useEffect,
+} from "react";
 import { CartState, CartItem } from "types";
+import {
+  getCartItemsFromLocalStorage,
+  setCartItemsInLocalStorage,
+} from "services/api/store/cartStore";
 
 export const CartStateContext = createContext<CartState | null>(null);
 
@@ -8,7 +18,16 @@ export const CartStateContextProvider = ({
 }: {
   children: ReactNode;
 }) => {
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [cartItems, setCartItems] = useState<CartItem[] | undefined>(undefined);
+
+  useEffect(() => {
+    setCartItems(getCartItemsFromLocalStorage());
+  }, []);
+
+  useEffect(() => {
+    if (!cartItems) return;
+    setCartItemsInLocalStorage(cartItems);
+  }, [cartItems]);
 
   return (
     <CartStateContext.Provider
@@ -16,6 +35,7 @@ export const CartStateContextProvider = ({
         items: cartItems,
         addItemToCart: (item) => {
           setCartItems((prevState) => {
+            if (!prevState) return;
             const existingItem = prevState.find(
               (existingItem) => existingItem.id === item.id
             );
@@ -36,9 +56,8 @@ export const CartStateContextProvider = ({
         },
         removeItemFromCart: (id) => {
           setCartItems((prevState) => {
-            const existingItem = prevState.find(
-              (item) => item.id === id
-            );
+            if (!prevState) return;
+            const existingItem = prevState.find((item) => item.id === id);
             if (existingItem && existingItem.count === 1) {
               return prevState.filter((item) => item.id !== id);
             }

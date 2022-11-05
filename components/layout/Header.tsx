@@ -12,10 +12,10 @@ export const Header = () => {
   ];
 
   return (
-    <header className="max-w mx-auto w-full h-16 flex justify-center content-center bg-color-secondary">
+    <header className="max-w mx-auto w-full h-16 flex justify-center content-center bg-color-secondary text-color-grey">
       <nav className="max-w mx-auto w-full flex justify-between content-center gap-2 p-2 px-8 border-b border-gray-300">
         <Image
-          src="/assets/common/logo-dark.svg"
+          src="/assets/common/logo-light.svg"
           alt="Shoppy"
           width="150"
           height="50"

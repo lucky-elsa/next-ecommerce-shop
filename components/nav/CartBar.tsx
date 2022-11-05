@@ -11,7 +11,7 @@ export const CartBar = ({ href }: CartBarProps) => {
 
   return (
     <Link href={href}>
-      <a className="text-black">
+      <a className="text-color-gray">
         <Image
           className="rounded-full hover:animate-bounce"
           src="/assets/icons/basket.svg"
@@ -20,7 +20,7 @@ export const CartBar = ({ href }: CartBarProps) => {
           height="30"
           layout="intrinsic"
         />
-        <span>{cartState.items.length}</span>
+        <span>{cartState?.items?.length}</span>
       </a>
     </Link>
   );

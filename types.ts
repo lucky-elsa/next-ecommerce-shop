@@ -22,7 +22,7 @@ export interface CartItem {
 }
 
 export interface CartState {
-  readonly items: readonly CartItem[];
+  readonly items: readonly CartItem[] | undefined;
   addItemToCart: (item: CartItem) => void;
   removeItemFromCart: (id: CartItem["id"]) => void;
 }

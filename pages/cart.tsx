@@ -5,13 +5,13 @@ const CartContent = () => {
   return (
     <div className="col-span-2">
       <ul className="divide-y divide-gray-200">
-        {cartState.items.map((item, index) => (
+        {cartState && cartState?.items?.map((item, index) => (
           <li key={`${index}_${item.title}`} className="p-4">
             <div className="flex justify-between">
               <div>{item.title}</div>
               <div className="flex">
                 <span>{item.price} x {item.count}</span>{" "}
-                <button className="ml-4 bg-transparent text-blue-900 text-xs font-semibold hover:text-color-secondary" onClick={() => {cartState.removeItemFromCart(item.id)}}>
+                <button className="ml-4 bg-transparent text-color-primary text-xs font-semibold hover:text-color-secondary" onClick={() => {cartState.removeItemFromCart(item.id)}}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -42,7 +42,7 @@ const CartSummary = () => {
   return (
     <div>
       Cart Summary
-      <div>Items total: {cartState.items.length}</div>
+      <div>Items total: {cartState?.items?.length}</div>
     </div>
   );
 };
