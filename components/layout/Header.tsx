@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { CartBar } from "@/components/nav/CartBar";
 
 export const Header = () => {
   const router = useRouter();
@@ -25,9 +26,7 @@ export const Header = () => {
             <Link key={link.href} href={link.href}>
               <a
                 className={
-                  router.asPath === link.href
-                    ? "border-b-2 border-white"
-                    : ""
+                  router.asPath === link.href ? "border-b-2 border-white" : ""
                 }
               >
                 {link.label}
@@ -36,11 +35,12 @@ export const Header = () => {
           ))}
         </div>
         <div className="flex justify-items-center items-center gap-4">
-        <Link href="">
+          <CartBar href={"/cart"} />
+          <Link href="">
             <a>
               <Image
                 className="rounded-full hover:animate-bounce"
-                src="/assets/icons/basket.svg"
+                src="/assets/icons/heart.svg"
                 alt="Profile"
                 width="30"
                 height="30"
@@ -49,30 +49,16 @@ export const Header = () => {
             </a>
           </Link>
           <Link href="">
-
-              <a>
-                <Image
-                  className="rounded-full hover:animate-bounce"
-                  src="/assets/icons/heart.svg"
-                  alt="Profile"
-                  width="30"
-                  height="30"
-                  layout="intrinsic"
-                />
-              </a>
-          </Link>
-          <Link href="">
-
-              <a>
-                <Image
-                  className="rounded-full"
-                  src="/assets/common/avatar.png"
-                  alt="Profile"
-                  width="30"
-                  height="30"
-                  layout="intrinsic"
-                />
-              </a>
+            <a>
+              <Image
+                className="rounded-full"
+                src="/assets/common/avatar.png"
+                alt="Profile"
+                width="30"
+                height="30"
+                layout="intrinsic"
+              />
+            </a>
           </Link>
         </div>
       </nav>

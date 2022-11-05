@@ -1,4 +1,4 @@
-import { ProductApiResponse } from "../../types";
+import { ProductApiResponse } from "types";
 
 export const fetchProducts = async (take: number, offset: number) => {
     const res = await fetch(

@@ -1,6 +1,6 @@
 import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
-import { ProductDetails } from "../../components/Product";
-import { ProductApiResponse } from "../../types";
+import { ProductDetails } from "@/components/Product";
+import { ProductApiResponse } from "types";
 import Link from "next/link";
 import { serialize } from "next-mdx-remote/serialize";
 

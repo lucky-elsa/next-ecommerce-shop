@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { ProductListItem } from "@/components/Product";
-import { ProductApiResponse } from "../../types";
+import { ProductApiResponse } from "types";
 import { fetchProducts } from "services/api/fetchProducts";
 
 const PaginationTask1 = () => {

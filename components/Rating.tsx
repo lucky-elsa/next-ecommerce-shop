@@ -1,9 +1,7 @@
 type RatingT = {
-    rating: number;
-}
+  rating: number;
+};
 
-export const Rating = ({rating}: RatingT) => {
-    return (
-        <div>{rating}</div>
-    )
-}
+export const Rating = ({ rating }: RatingT) => {
+  return <div>{rating}</div>;
+};

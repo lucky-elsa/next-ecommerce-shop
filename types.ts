@@ -14,6 +14,19 @@ export interface ProductApiResponse {
   longDescription: string;
 }
 
+export interface CartItem {
+  readonly id: number;
+  readonly price: number;
+  readonly title: string;
+  readonly count: number;
+}
+
+export interface CartState {
+  readonly items: readonly CartItem[];
+  addItemToCart: (item: CartItem) => void;
+  removeItemFromCart: (id: CartItem["id"]) => void;
+}
+
 export type MarkdownResult = MDXRemoteSerializeResult<
   Record<string, unknown>,
   Record<string, string>

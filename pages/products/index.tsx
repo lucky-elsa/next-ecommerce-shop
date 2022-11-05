@@ -1,6 +1,6 @@
 import { InferGetStaticPropsType } from "next";
-import { ProductsApiResponse } from "../../types";
-import { ProductListItem } from "../../components/Product";
+import { ProductApiResponse } from "types";
+import { ProductListItem } from "@/components/Product";
 
 const ProductsPage = ({
   data,
@@ -27,7 +27,7 @@ const ProductsPage = ({
 
 export const getStaticProps = async () => {
   const res = await fetch(`https://naszsklep-api.vercel.app/api/products/`);
-  const data: ProductsApiResponse[] = await res.json();
+  const data: ProductApiResponse[] = await res.json();
 
   return {
     props: {

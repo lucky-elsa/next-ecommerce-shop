@@ -1,21 +1,17 @@
+import { useCartState } from "context/CartContext";
 import Image from "next/image";
 import Link from "next/link";
 
-interface CartItem {
-    price: number;
-    title: string;
-}
-
 type CartBarProps = {
-    href: string;
-}
+  href: string;
+};
 
-export const CartBar = ({href}: CartBarProps) => {
-
+export const CartBar = ({ href }: CartBarProps) => {
+  const cartState = useCartState();
 
   return (
     <Link href={href}>
-      <a>
+      <a className="text-black">
         <Image
           className="rounded-full hover:animate-bounce"
           src="/assets/icons/basket.svg"
@@ -24,6 +20,7 @@ export const CartBar = ({href}: CartBarProps) => {
           height="30"
           layout="intrinsic"
         />
+        <span>{cartState.items.length}</span>
       </a>
     </Link>
   );

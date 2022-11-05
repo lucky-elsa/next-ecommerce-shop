@@ -1,10 +1,11 @@
 import { Rating } from "./Rating";
-import { ProductProps, ProductListItemProps } from "../types";
+import { ProductProps, ProductListItemProps } from "types";
 import Link from "next/link";
 import Image from "next/image";
 import { NextSeo } from "next-seo";
 import { MDXRemote } from "next-mdx-remote";
 import { checkIfExternalURL } from "@/utils/checkIfExternalURL";
+import { useCartState } from "context/CartContext";
 
 export const ProductDetails = ({ data }: ProductProps) => {
   return (
@@ -46,7 +47,12 @@ export const ProductDetails = ({ data }: ProductProps) => {
                 }
                 if (checkIfExternalURL(href)) {
                   return (
-                    <a href={href} {...props} rel="noopener noreferrer" target="_blank"></a>
+                    <a
+                      href={href}
+                      {...props}
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    ></a>
                   );
                 }
                 return (
@@ -66,6 +72,7 @@ export const ProductDetails = ({ data }: ProductProps) => {
 };
 
 export const ProductListItem = ({ data }: ProductListItemProps) => {
+  const cartState = useCartState();
   return (
     <>
       <div className="bg-white">
@@ -80,9 +87,17 @@ export const ProductListItem = ({ data }: ProductListItemProps) => {
       </div>
       <Link href={`/products/${data.id}`}>
         <a>
-          <h2 className="p-4 text-3xl font-bold">{data.title}</h2>
+          <h2 className="m-4 text-3xl font-bold">{data.title}</h2>
         </a>
       </Link>
+      <button
+        className="m-4 bg-transparent hover:bg-color-secondary text-blue-900 font-semibold hover:text-white py-2 px-4 border border-color-secondary hover:border-transparent rounded"
+        onClick={() =>
+          cartState.addItemToCart({ id: data.id, price: 21.3, title: data.title, count: 1 })
+        }
+      >
+        Add to basket
+      </button>
     </>
   );
 };
