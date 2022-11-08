@@ -9,7 +9,7 @@ import { CartState, CartItem } from "types";
 import {
   getCartItemsFromLocalStorage,
   setCartItemsInLocalStorage,
-} from "services/api/store/cartStore";
+} from "services/store/cartStore";
 
 export const CartStateContext = createContext<CartState | null>(null);
 

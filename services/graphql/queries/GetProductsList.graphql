@@ -1,0 +1,9 @@
+query GetProductsList {
+        products {
+          slug
+          title
+          thumbnail {
+            url
+          }
+        }
+      }

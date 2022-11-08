@@ -14,8 +14,18 @@ export interface ProductApiResponse {
   longDescription: string;
 }
 
+export interface Product {
+  slug: string;
+  title: string;
+  thumbnail: { url: string };
+}
+
+export interface GetProductListResponse {
+  products: Product[];
+}
+
 export interface CartItem {
-  readonly id: number;
+  readonly id: string;
   readonly price: number;
   readonly title: string;
   readonly count: number;
@@ -33,7 +43,7 @@ export type MarkdownResult = MDXRemoteSerializeResult<
 >;
 
 export interface ProductDetails {
-  id: number;
+  id: string;
   title: string;
   description: string;
   thumbnailUrl: string;

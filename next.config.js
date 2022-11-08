@@ -6,7 +6,8 @@ const nextConfig = {
     domains: [
       "localhost",
       "fakestoreapi.com",
-      "naszsklep-api.vercel.app"
+      "naszsklep-api.vercel.app",
+      "media.graphassets.com"
     ],
   },
 }
