@@ -1271,16 +1271,16 @@ export type Product = Node & {
   /** The unique identifier */
   id: Scalars['ID'];
   longDescription?: Maybe<Scalars['String']>;
-  price?: Maybe<Scalars['Int']>;
+  price: Scalars['Int'];
   /** The time the document was published. Null on documents in draft stage. */
   publishedAt?: Maybe<Scalars['DateTime']>;
   /** User that last published this document */
   publishedBy?: Maybe<User>;
   scheduledIn: Array<ScheduledOperation>;
-  slug?: Maybe<Scalars['String']>;
+  slug: Scalars['String'];
   /** System stage field */
   stage: Stage;
-  thumbnail?: Maybe<Asset>;
+  thumbnail: Asset;
   title: Scalars['String'];
   /** The time the document was updated */
   updatedAt: Scalars['DateTime'];
@@ -1354,9 +1354,9 @@ export type ProductCreateInput = {
   createdAt?: InputMaybe<Scalars['DateTime']>;
   description?: InputMaybe<Scalars['String']>;
   longDescription?: InputMaybe<Scalars['String']>;
-  price?: InputMaybe<Scalars['Int']>;
-  slug?: InputMaybe<Scalars['String']>;
-  thumbnail?: InputMaybe<AssetCreateOneInlineInput>;
+  price: Scalars['Int'];
+  slug: Scalars['String'];
+  thumbnail: AssetCreateOneInlineInput;
   title: Scalars['String'];
   updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
@@ -3618,17 +3618,17 @@ export type GetProductDetailsBySlugQueryVariables = Exact<{
 }>;
 
 
-export type GetProductDetailsBySlugQuery = { __typename?: 'Query', product?: { __typename?: 'Product', slug?: string | null, title: string, description?: string | null, longDescription?: string | null, price?: number | null, thumbnail?: { __typename?: 'Asset', url: string } | null } | null };
+export type GetProductDetailsBySlugQuery = { __typename?: 'Query', product?: { __typename?: 'Product', slug: string, title: string, description?: string | null, longDescription?: string | null, price: number, thumbnail: { __typename?: 'Asset', url: string } } | null };
 
 export type GetProductsListQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetProductsListQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', slug?: string | null, title: string, thumbnail?: { __typename?: 'Asset', url: string } | null }> };
+export type GetProductsListQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', slug: string, title: string, thumbnail: { __typename?: 'Asset', url: string } }> };
 
 export type GetProductsSlugsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetProductsSlugsQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', slug?: string | null }> };
+export type GetProductsSlugsQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', slug: string }> };
 
 
 export const GetProductDetailsBySlugDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetProductDetailsBySlug"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"product"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"longDescription"}},{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"thumbnail"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]} as unknown as DocumentNode<GetProductDetailsBySlugQuery, GetProductDetailsBySlugQueryVariables>;

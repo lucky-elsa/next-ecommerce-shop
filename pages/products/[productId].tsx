@@ -1,10 +1,11 @@
 import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import { ProductDetails } from "@/components/Product";
-import { ProductApiResponse, GetProductListResponse } from "types";
+import { GetProductListResponse } from "types";
 import Link from "next/link";
 import { serialize } from "next-mdx-remote/serialize";
 import { apolloClient } from "services/graphql/apolloClient";
 import { gql } from "@apollo/client";
+import { GetProductDetailsBySlugDocument, GetProductDetailsBySlugQuery, GetProductsSlugsDocument, GetProductsSlugsQuery } from "generated/graphql";
 
 const ProductIdPage = ({
   data,
@@ -24,7 +25,7 @@ const ProductIdPage = ({
           title: data.title,
           thumbnailUrl: data.thumbnail.url,
           thumbnailAlt: data.title,
-          description: data.description,
+          description: data.description ?? "",
           rating: data.price,
           longDescription: data.longDescription,
         }}
@@ -42,14 +43,8 @@ export type InferGetStaticPathsType<T> = T extends () => Promise<{
   : never;
 
 export const getStaticPaths = async () => {
-  const { data } = await apolloClient.query<GetProductListResponse>({
-    query: gql`
-      query GetProductsSlugs {
-        products {
-          slug
-        }
-      }
-    `,
+  const { data } = await apolloClient.query<GetProductsSlugsQuery>({
+    query: GetProductsSlugsDocument,
   });
 
   interface Product {
@@ -76,40 +71,14 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
     };
   }
 
-  interface GetProductDetailsBySlugRensponse {
-    product: Product;
-  }
-
-  interface Product {
-    slug: string;
-    title: string;
-    price: number;
-    description: string;
-    longDescription: string;
-    thumbnail: {url: string};
-  }
-
-  const { data } = await apolloClient.query<GetProductDetailsBySlugRensponse>({
+  const { data } = await apolloClient.query<GetProductDetailsBySlugQuery>({
     variables: {
       slug: params.productId,
     },
-    query: gql`
-      query GetProductDetailsBySlug($slug: String) {
-        product(where: { slug: $slug }) {
-          slug
-          title
-          description
-          longDescription
-          price
-          thumbnail {
-            url
-          }
-        }
-      }
-    `,
+    query: GetProductDetailsBySlugDocument
   });
 
-  if (!data) {
+  if (!data.product || !data.product.longDescription) {
     return {
       props: {},
       notFound: true,
