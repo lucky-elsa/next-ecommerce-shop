@@ -49,7 +49,7 @@ export const Input = ({
           errorMsg && "border-red-500"
         }`}
       />
-      {hasError && <p className="text-red-500 text-xs italic">{errorMsg}</p>}
+      <p className="text-red-500 text-xs italic h-6">{ hasError ? errorMsg : ""}</p>
     </div>
   );
 };
