@@ -93,7 +93,12 @@ export const ProductListItem = ({ data }: ProductListItemProps) => {
       <button
         className="m-4 bg-transparent hover:bg-color-secondary text-color-primary font-semibold hover:text-white py-2 px-4 border border-color-secondary hover:border-transparent rounded"
         onClick={() =>
-          cartState.addItemToCart({ id: data.id, price: 21.3, title: data.title, count: 1 })
+          cartState.addItemToCart({
+            id: data.id,
+            price: 21.3,
+            title: data.title,
+            count: 1,
+          })
         }
       >
         Add to basket

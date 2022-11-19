@@ -64,3 +64,12 @@ export type ProductListItem = Pick<
 export interface ProductListItemProps {
   data: ProductListItem;
 }
+
+export type CheckoutFormTypes = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  cardNumber: number;
+  expiryDate: string;
+  CVVNumber: number;
+};
