@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Input } from "./Input";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -8,31 +9,35 @@ import {
   checkoutFormPaymentsFields,
 } from "@/utils/data/checkoutFormFields";
 import { useCartState } from "context/CartContext";
-import { apolloClient } from "services/graphql/apolloClient";
-import { CreateOrderDocument, CreateOrderMutation, CreateOrderMutationVariables } from "generated/graphql";
+import { CreateOrderDocument, useCreateOrderMutation } from "generated/graphql";
 
 export const CheckoutForm = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<CheckoutFormTypes>({ resolver: yupResolver(checkoutFormSchema) });
   const cartState = useCartState();
+  const [createOrder, {error}] = useCreateOrderMutation();
 
   const onSubmit = async (formData: CheckoutFormTypes) => {
-    if (!cartState.items) return;
+    if (!cartState.items || cartState.items.length === 0) return;
     const orderDetails = {
       firstName: formData.firstName,
       lastName: formData.lastName,
       email: formData.email,
       cartItems: cartState.items,
     };
-    apolloClient.mutate<CreateOrderMutation, CreateOrderMutationVariables>({
+    const data = await createOrder({
       mutation: CreateOrderDocument,
       variables: {
-        order: orderDetails
-      }
+        order: orderDetails,
+      },
     });
+    if (error) alert("Something when wrong. Please try again.");
+    reset();
+    alert("Payment completed.")
   };
 
   return (
