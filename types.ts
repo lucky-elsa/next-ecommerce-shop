@@ -32,7 +32,7 @@ export interface CartItem {
 }
 
 export interface CartState {
-  readonly items: readonly CartItem[] | undefined;
+  readonly items: /*readonly*/ CartItem[] | undefined;
   addItemToCart: (item: CartItem) => void;
   removeItemFromCart: (id: CartItem["id"]) => void;
 }

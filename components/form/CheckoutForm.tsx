@@ -7,6 +7,9 @@ import {
   checkoutFormDetailsFields,
   checkoutFormPaymentsFields,
 } from "@/utils/data/checkoutFormFields";
+import { useCartState } from "context/CartContext";
+import { apolloClient } from "services/graphql/apolloClient";
+import { CreateOrderDocument, CreateOrderMutation, CreateOrderMutationVariables } from "generated/graphql";
 
 export const CheckoutForm = () => {
   const {
@@ -14,9 +17,22 @@ export const CheckoutForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<CheckoutFormTypes>({ resolver: yupResolver(checkoutFormSchema) });
+  const cartState = useCartState();
 
   const onSubmit = async (formData: CheckoutFormTypes) => {
-    console.log(formData);
+    if (!cartState.items) return;
+    const orderDetails = {
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      email: formData.email,
+      cartItems: cartState.items,
+    };
+    apolloClient.mutate<CreateOrderMutation, CreateOrderMutationVariables>({
+      mutation: CreateOrderDocument,
+      variables: {
+        order: orderDetails
+      }
+    });
   };
 
   return (

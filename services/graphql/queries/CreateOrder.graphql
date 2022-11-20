@@ -1,0 +1,7 @@
+mutation CreateOrder($order: OrderCreateInput!) {
+  createOrder(
+    data: $order) {
+    id
+    stage
+  }
+}
