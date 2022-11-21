@@ -6,7 +6,7 @@ import { NextSeo } from "next-seo";
 import { MDXRemote } from "next-mdx-remote";
 import { checkIfExternalURL } from "@/utils/checkIfExternalURL";
 import { useCartState } from "context/CartContext";
-import { AddReviewForm } from "./form/AddReviewForm";
+// import { AddReviewForm } from "./form/AddReviewForm";
 
 export const ProductDetails = ({ data }: ProductProps) => {
   return (
@@ -69,7 +69,7 @@ export const ProductDetails = ({ data }: ProductProps) => {
         <hr></hr>
         <div>reviews</div>
         <hr></hr>
-        <AddReviewForm/>
+        {/* <AddReviewForm/> */}
       </div>
     </>
   );
