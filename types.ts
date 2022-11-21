@@ -18,6 +18,7 @@ export interface Product {
   slug: string;
   title: string;
   thumbnail: { url: string };
+  price: number;
 }
 
 export interface GetProductListResponse {
@@ -48,7 +49,7 @@ export interface ProductDetails {
   description: string;
   thumbnailUrl: string;
   thumbnailAlt: string;
-  rating: number;
+  price: number;
   longDescription: MarkdownResult;
 }
 
@@ -58,7 +59,7 @@ export interface ProductProps {
 
 export type ProductListItem = Pick<
   ProductDetails,
-  "id" | "title" | "thumbnailUrl" | "thumbnailAlt"
+  "id" | "title" | "thumbnailUrl" | "thumbnailAlt" | "price"
 >;
 
 export interface ProductListItemProps {
@@ -72,4 +73,11 @@ export type CheckoutFormTypes = {
   cardNumber: number;
   expiryDate: string;
   CVVNumber: number;
+};
+
+export type AddReviewFormTypes = {
+  name: string;
+  email: string;
+  review: string;
+  rating: number;
 };

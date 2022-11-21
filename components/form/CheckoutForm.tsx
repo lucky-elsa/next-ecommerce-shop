@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Input } from "./Input";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -19,7 +18,7 @@ export const CheckoutForm = () => {
     reset,
   } = useForm<CheckoutFormTypes>({ resolver: yupResolver(checkoutFormSchema) });
   const cartState = useCartState();
-  const [createOrder, {error}] = useCreateOrderMutation();
+  const [createOrder, { error }] = useCreateOrderMutation();
 
   const onSubmit = async (formData: CheckoutFormTypes) => {
     if (!cartState.items || cartState.items.length === 0) return;
@@ -37,7 +36,7 @@ export const CheckoutForm = () => {
     });
     if (error) alert("Something when wrong. Please try again.");
     reset();
-    alert("Payment completed.")
+    alert("Payment completed.");
   };
 
   return (

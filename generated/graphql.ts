@@ -4673,7 +4673,7 @@ export type GetProductDetailsBySlugQuery = { __typename?: 'Query', product?: { _
 export type GetProductsListQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetProductsListQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', slug: string, title: string, thumbnail: { __typename?: 'Asset', url: string } }> };
+export type GetProductsListQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', slug: string, title: string, price: number, thumbnail: { __typename?: 'Asset', url: string } }> };
 
 export type GetProductsSlugsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -4765,6 +4765,7 @@ export const GetProductsListDocument = gql`
     thumbnail {
       url
     }
+    price
   }
 }
     `;

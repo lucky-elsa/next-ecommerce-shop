@@ -18,6 +18,7 @@ const ProductsPage = ({
                 title: product.title,
                 thumbnailUrl: product.thumbnail.url,
                 thumbnailAlt: product.title,
+                price: product.price
               }}
             />
           </li>

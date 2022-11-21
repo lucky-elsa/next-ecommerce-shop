@@ -1,4 +1,4 @@
-import { Rating } from "./Rating";
+import { Rating as Price } from "./Price";
 import { ProductProps, ProductListItemProps } from "types";
 import Link from "next/link";
 import Image from "next/image";
@@ -6,6 +6,7 @@ import { NextSeo } from "next-seo";
 import { MDXRemote } from "next-mdx-remote";
 import { checkIfExternalURL } from "@/utils/checkIfExternalURL";
 import { useCartState } from "context/CartContext";
+import { AddReviewForm } from "./form/AddReviewForm";
 
 export const ProductDetails = ({ data }: ProductProps) => {
   return (
@@ -65,7 +66,10 @@ export const ProductDetails = ({ data }: ProductProps) => {
             {...data.longDescription}
           />
         </article>
-        <Rating rating={data.rating} />
+        <hr></hr>
+        <div>reviews</div>
+        <hr></hr>
+        <AddReviewForm/>
       </div>
     </>
   );
@@ -90,12 +94,13 @@ export const ProductListItem = ({ data }: ProductListItemProps) => {
           <h2 className="m-4 text-2xl font-bold">{data.title}</h2>
         </a>
       </Link>
+      <Price price={data.price} />
       <button
         className="m-4 bg-transparent hover:bg-color-secondary text-color-primary font-semibold hover:text-white py-2 px-4 border border-color-secondary hover:border-transparent rounded"
         onClick={() =>
           cartState.addItemToCart({
             id: data.id,
-            price: 21.3,
+            price: data.price,
             title: data.title,
             count: 1,
           })
