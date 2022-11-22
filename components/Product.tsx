@@ -91,7 +91,7 @@ export const ProductDetails = ({ data }: ProductProps) => {
               sunt in culpa qui officia deserunt mollit anim id est laborum.
             </div>
           </div>
-          <AddReviewForm />
+          <AddReviewForm productId={data.id}/>
         </div>
       </div>
     </>

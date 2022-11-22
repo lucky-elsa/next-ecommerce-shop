@@ -7,7 +7,11 @@ import { FormTypes } from "types";
 import { Textarea } from "./Textarea";
 import { CreateReviewDocument, useCreateReviewMutation } from "generated/graphql";
 
-export const AddReviewForm = () => {
+type AddReviewFormProps = {
+  productId: string;
+}
+
+export const AddReviewForm = ({productId}: AddReviewFormProps) => {
   const {
     register,
     handleSubmit,
@@ -23,7 +27,8 @@ export const AddReviewForm = () => {
       name: reviewData.name,
       email: reviewData.email,
       rating: Number(reviewData.rating),
-      review: reviewData.review
+      review: reviewData.review,
+      product: { connect: { slug: productId } }
     };
     await createReview({
       mutation: CreateReviewDocument,
