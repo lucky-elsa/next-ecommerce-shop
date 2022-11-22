@@ -1,7 +1,6 @@
 import { Input } from "./Input";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { CheckoutFormTypes } from "types";
 import { checkoutFormSchema } from "@/utils/validations/checkoutFormSchema";
 import {
   checkoutFormDetailsFields,
@@ -9,6 +8,7 @@ import {
 } from "@/utils/data/checkoutFormFields";
 import { useCartState } from "context/CartContext";
 import { CreateOrderDocument, useCreateOrderMutation } from "generated/graphql";
+import { FormTypes } from "types";
 
 export const CheckoutForm = () => {
   const {
@@ -16,19 +16,19 @@ export const CheckoutForm = () => {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<CheckoutFormTypes>({ resolver: yupResolver(checkoutFormSchema) });
+  } = useForm<FormTypes<string | number>>({ resolver: yupResolver(checkoutFormSchema) });
   const cartState = useCartState();
   const [createOrder, { error }] = useCreateOrderMutation();
 
-  const onSubmit = async (formData: CheckoutFormTypes) => {
+  const onSubmit = async (formData: FormTypes<string | number>) => {
     if (!cartState.items || cartState.items.length === 0) return;
     const orderDetails = {
-      firstName: formData.firstName,
-      lastName: formData.lastName,
-      email: formData.email,
+      firstName: formData.firstName.toString(),
+      lastName: formData.lastName.toString(),
+      email: formData.email.toString(),
       cartItems: cartState.items,
     };
-    const data = await createOrder({
+    await createOrder({
       mutation: CreateOrderDocument,
       variables: {
         order: orderDetails,

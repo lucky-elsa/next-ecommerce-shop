@@ -1,22 +1,15 @@
 import React, { InputHTMLAttributes } from "react";
 import { Path, UseFormRegister, FieldErrorsImpl } from "react-hook-form";
-import { CheckoutFormTypes } from "types";
+import { FormTypes } from "types";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  name: Path<CheckoutFormTypes>;
+  name: Path<FormTypes<string | number>>;
   label: string;
   type: "text" | "number" | "email" | "date";
   placeholder: string;
-  register: UseFormRegister<CheckoutFormTypes>;
+  register: UseFormRegister<FormTypes<string | number>>;
   errors: Partial<
-    FieldErrorsImpl<{
-      firstName: string;
-      lastName: string;
-      email: string;
-      cardNumber: number;
-      expiryDate: string;
-      CVVNumber: number;
-    }>
+    FieldErrorsImpl<FormTypes<string>>
   >;
 }
 
