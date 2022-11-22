@@ -6,7 +6,7 @@ interface TextareaProps extends InputHTMLAttributes<HTMLTextAreaElement> {
   name: string;
   label: string;
   placeholder: string;
-  register: UseFormRegister<FormTypes<string | number>>;
+  register: UseFormRegister<FormTypes<string>>;
   errors: Partial<FieldErrorsImpl<FormTypes<string>>>;
 }
 

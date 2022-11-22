@@ -13,17 +13,17 @@ export const AddReviewForm = () => {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<FormTypes<string | number>>({
+  } = useForm<FormTypes<string>>({
     resolver: yupResolver(addReviewFormSchema),
   });
   const [createReview, { error }] = useCreateReviewMutation();
 
-  const onSubmit = async (reviewData: FormTypes<string | number>) => {
+  const onSubmit = async (reviewData: FormTypes<string>) => {
     const review = {
-      name: reviewData.name.toString(),
-      email: reviewData.email.toString(),
+      name: reviewData.name,
+      email: reviewData.email,
       rating: Number(reviewData.rating),
-      review: reviewData.review.toString()
+      review: reviewData.review
     };
     await createReview({
       mutation: CreateReviewDocument,
