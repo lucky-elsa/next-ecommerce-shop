@@ -6,8 +6,8 @@ interface TextareaProps extends InputHTMLAttributes<HTMLTextAreaElement> {
   name: string;
   label: string;
   placeholder: string;
-  register: UseFormRegister<FormTypes<string>>;
-  errors: Partial<FieldErrorsImpl<FormTypes<string>>>;
+  register: UseFormRegister<FormTypes>;
+  errors: Partial<FieldErrorsImpl<FormTypes>>;
 }
 
 export const Textarea = ({

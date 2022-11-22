@@ -16,11 +16,11 @@ export const CheckoutForm = () => {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<FormTypes<string>>({ resolver: yupResolver(checkoutFormSchema) });
+  } = useForm<FormTypes>({ resolver: yupResolver(checkoutFormSchema) });
   const cartState = useCartState();
   const [createOrder, { error }] = useCreateOrderMutation();
 
-  const onSubmit = async (formData: FormTypes<string>) => {
+  const onSubmit = async (formData: FormTypes) => {
     if (!cartState.items || cartState.items.length === 0) return;
     const orderDetails = {
       firstName: formData.firstName,

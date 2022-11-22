@@ -3,13 +3,13 @@ import { Path, UseFormRegister, FieldErrorsImpl } from "react-hook-form";
 import { FormTypes } from "types";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  name: Path<FormTypes<string>>;
+  name: Path<FormTypes>;
   label: string;
   type: "text" | "number" | "email" | "date";
   placeholder: string;
-  register: UseFormRegister<FormTypes<string>>;
+  register: UseFormRegister<FormTypes>;
   errors: Partial<
-    FieldErrorsImpl<FormTypes<string>>
+    FieldErrorsImpl<FormTypes>
   >;
 }
 

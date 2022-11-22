@@ -63,6 +63,6 @@ export interface ProductListItemProps {
   data: ProductListItem;
 }
 
-export interface FormTypes<T> extends FieldValues {
-  [x: string]: T;
+export interface FormTypes extends FieldValues {
+  [x: string]: string;
 }

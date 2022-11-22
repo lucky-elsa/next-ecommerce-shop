@@ -13,12 +13,12 @@ export const AddReviewForm = () => {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<FormTypes<string>>({
+  } = useForm<FormTypes>({
     resolver: yupResolver(addReviewFormSchema),
   });
   const [createReview, { error }] = useCreateReviewMutation();
 
-  const onSubmit = async (reviewData: FormTypes<string>) => {
+  const onSubmit = async (reviewData: FormTypes) => {
     const review = {
       name: reviewData.name,
       email: reviewData.email,
