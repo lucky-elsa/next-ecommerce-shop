@@ -1,10 +1,8 @@
 import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import { ProductDetails } from "@/components/Product";
-import { GetProductListResponse } from "types";
 import Link from "next/link";
 import { serialize } from "next-mdx-remote/serialize";
 import { apolloClient } from "services/graphql/apolloClient";
-import { gql } from "@apollo/client";
 import { GetProductDetailsBySlugDocument, GetProductDetailsBySlugQuery, GetProductsSlugsDocument, GetProductsSlugsQuery } from "generated/graphql";
 
 const ProductIdPage = ({
@@ -26,7 +24,7 @@ const ProductIdPage = ({
           thumbnailUrl: data.thumbnail.url,
           thumbnailAlt: data.title,
           description: data.description ?? "",
-          rating: data.price,
+          price: data.price,
           longDescription: data.longDescription,
         }}
       />

@@ -7,10 +7,6 @@ export interface ProductApiResponse {
   description: string;
   category: string;
   image: string;
-  rating: {
-    rate: number;
-    count: number;
-  };
   longDescription: string;
 }
 

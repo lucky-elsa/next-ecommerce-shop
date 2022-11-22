@@ -42,6 +42,7 @@ const PaginationTask1 = () => {
                   title: product.title,
                   thumbnailUrl: product.image,
                   thumbnailAlt: product.title,
+                  price: product.price
                 }}
               ></ProductListItem>
             </li>
