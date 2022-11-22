@@ -1,9 +1,9 @@
 import React, { InputHTMLAttributes } from "react";
-import { UseFormRegister, FieldErrorsImpl } from "react-hook-form";
+import { Path, UseFormRegister, FieldErrorsImpl } from "react-hook-form";
 import { FormTypes } from "types";
 
 interface TextareaProps extends InputHTMLAttributes<HTMLTextAreaElement> {
-  name: string;
+  name: Path<FormTypes>;
   label: string;
   placeholder: string;
   register: UseFormRegister<FormTypes>;
@@ -36,6 +36,7 @@ export const Textarea = ({
         rows={4}
         cols={50}
       />
+       <p className="text-red-500 text-xs italic h-6">{ hasError ? errorMsg : ""}</p>
     </div>
   );
 };

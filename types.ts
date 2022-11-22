@@ -1,5 +1,4 @@
 import { MDXRemoteSerializeResult } from "next-mdx-remote";
-import { FieldValues } from "react-hook-form";
 
 export interface ProductApiResponse {
   id: number;
@@ -63,6 +62,14 @@ export interface ProductListItemProps {
   data: ProductListItem;
 }
 
-export interface FormTypes extends FieldValues {
-  [x: string]: string;
+export type FormTypes = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  cardNumber: string;
+  expiryDate: string;
+  CVVNumber: string;
+  name: string;
+  rating: string;
+  review: string;
 }
