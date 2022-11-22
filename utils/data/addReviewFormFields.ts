@@ -1,7 +1,7 @@
 type checkoutFormDetailsFieldsT = {
   name: "name" | "email" | "rating" | "review";
   label: string;
-  type: "text" | "email" | "number";
+  type: "text" | "email" | "number" | "textarea";
   placeholder: string;
 };
 
@@ -27,7 +27,7 @@ export const addReviewFormFields: checkoutFormDetailsFieldsT[] = [
     {
       name: "review",
       label: "Review",
-      type: "text",
-      placeholder: "Please enter your surname",
+      type: "textarea",
+      placeholder: "Start typing your review",
     },
   ];
