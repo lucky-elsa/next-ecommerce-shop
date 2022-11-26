@@ -28,7 +28,7 @@ export const Input = ({
     <div className="w-full px-3 mb-6 md:mb-0">
       <label
         htmlFor={name}
-        className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+        className="block uppercase tracking-wide text-gray-400 text-xs font-bold mb-2"
       >
         {label}
       </label>

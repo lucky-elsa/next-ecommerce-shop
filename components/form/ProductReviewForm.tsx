@@ -1,8 +1,8 @@
 import { Input } from "./Input";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { addReviewFormSchema } from "@/utils/validations/addReviewFormSchema";
-import { addReviewFormFields } from "@/utils/data/addReviewFormFields";
+import { productReviewFormSchema } from "@/utils/validations/productReviewFormSchema";
+import { productReviewFormFields } from "@/utils/data/productReviewFormFields";
 import { FormTypes } from "types";
 import { Textarea } from "./Textarea";
 import {
@@ -21,7 +21,7 @@ export const ProductReviewForm = ({ productId }: AddReviewFormProps) => {
     formState: { errors },
     reset,
   } = useForm<FormTypes>({
-    resolver: yupResolver(addReviewFormSchema),
+    resolver: yupResolver(productReviewFormSchema),
   });
   const [createReview, { error }] = useCreateReviewMutation();
 
@@ -51,7 +51,7 @@ export const ProductReviewForm = ({ productId }: AddReviewFormProps) => {
       className="flex flex-col justify-center w-full mt-4"
     >
       <div className="flex flex-col">
-        {addReviewFormFields.map((field) => {
+        {productReviewFormFields.map((field) => {
           if (field.type === "textarea") {
             return (
               <Textarea
