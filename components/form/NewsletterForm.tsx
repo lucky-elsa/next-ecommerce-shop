@@ -3,6 +3,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { FormTypes } from "types";
 import { Input } from "./Input";
+import { useAddToNewsletterMutation } from "services/api/addToNewsletterMutation";
 
 export const NewsletterForm = () => {
   const {
@@ -11,17 +12,13 @@ export const NewsletterForm = () => {
     formState: { errors },
     reset,
   } = useForm<FormTypes>({ resolver: yupResolver(newsletterFormSchema) });
+  const { mutate, error } = useAddToNewsletterMutation();
 
   const onSubmit = async (formData: FormTypes) => {
-    await fetch("http://localhost:3000/api/newsletter", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email: formData.email }),
-    });
-    reset();
+    mutate(formData.email);
+    if (!error) reset();
   };
+
   return (
     <form
       noValidate
