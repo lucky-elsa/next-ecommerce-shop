@@ -5,13 +5,16 @@ import { addReviewFormSchema } from "@/utils/validations/addReviewFormSchema";
 import { addReviewFormFields } from "@/utils/data/addReviewFormFields";
 import { FormTypes } from "types";
 import { Textarea } from "./Textarea";
-import { CreateReviewDocument, useCreateReviewMutation } from "generated/graphql";
+import {
+  CreateReviewDocument,
+  useCreateReviewMutation,
+} from "generated/graphql";
 
 type AddReviewFormProps = {
   productId: string;
-}
+};
 
-export const AddReviewForm = ({productId}: AddReviewFormProps) => {
+export const ProductReviewForm = ({ productId }: AddReviewFormProps) => {
   const {
     register,
     handleSubmit,
@@ -28,7 +31,7 @@ export const AddReviewForm = ({productId}: AddReviewFormProps) => {
       email: reviewData.email,
       rating: Number(reviewData.rating),
       review: reviewData.review,
-      product: { connect: { slug: productId } }
+      product: { connect: { slug: productId } },
     };
     await createReview({
       mutation: CreateReviewDocument,
