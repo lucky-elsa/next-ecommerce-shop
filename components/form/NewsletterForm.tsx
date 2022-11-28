@@ -2,7 +2,7 @@ import { newsletterFormSchema } from "@/utils/validations/newsletterSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { FormTypes } from "types";
-import { Input } from "./Input";
+import { Input } from "./components/Input";
 import { useAddToNewsletterMutation } from "services/api/addToNewsletterMutation";
 
 export const NewsletterForm = () => {

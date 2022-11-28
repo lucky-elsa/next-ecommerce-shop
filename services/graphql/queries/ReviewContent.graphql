@@ -1,0 +1,6 @@
+fragment reviewContent on Review {
+  id
+  name
+  review
+  rating
+}

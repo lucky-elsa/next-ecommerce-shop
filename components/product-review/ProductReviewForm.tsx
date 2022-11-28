@@ -1,10 +1,10 @@
-import { Input } from "./Input";
+import { Input } from "../form/components/Input";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { productReviewFormSchema } from "@/utils/validations/productReviewFormSchema";
 import { productReviewFormFields } from "@/utils/data/productReviewFormFields";
 import { FormTypes } from "types";
-import { Textarea } from "./Textarea";
+import { Textarea } from "../form/components/Textarea";
 import {
   CreateReviewDocument,
   useCreateReviewMutation,

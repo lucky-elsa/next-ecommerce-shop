@@ -6,7 +6,7 @@ import { NextSeo } from "next-seo";
 import { MDXRemote } from "next-mdx-remote";
 import { checkIfExternalURL } from "@/utils/checkIfExternalURL";
 import { useCartState } from "context/CartContext";
-import { ProductReviewForm } from "./form/ProductReviewForm";
+import { ProductReviewContainer } from "./product-review/ProductReviewContainer";
 
 export const ProductDetails = ({ data }: ProductProps) => {
   return (
@@ -67,32 +67,7 @@ export const ProductDetails = ({ data }: ProductProps) => {
           />
         </article>
         <hr></hr>
-        <div className="grid grid-cols-3 gap-20">
-          <div className="flex flex-col gap-10 m-5 col-span-2">
-            <p className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-              Reviews:
-            </p>
-            <div>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </div>
-            <div>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </div>
-          </div>
-          <ProductReviewForm productId={data.id} />
-        </div>
+        <ProductReviewContainer productSlug={data.id} />
       </div>
     </>
   );

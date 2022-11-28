@@ -2435,6 +2435,7 @@ export type Product = Node & {
   publishedAt?: Maybe<Scalars['DateTime']>;
   /** User that last published this document */
   publishedBy?: Maybe<User>;
+  reviews: Array<ProductReview>;
   scheduledIn: Array<ScheduledOperation>;
   slug: Scalars['String'];
   /** System stage field */
@@ -2469,6 +2470,16 @@ export type ProductHistoryArgs = {
 
 export type ProductPublishedByArgs = {
   locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type ProductReviewsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: InputMaybe<Array<Locale>>;
+  skip?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -2514,6 +2525,7 @@ export type ProductCreateInput = {
   description?: InputMaybe<Scalars['String']>;
   longDescription?: InputMaybe<Scalars['String']>;
   price: Scalars['Int'];
+  reviews?: InputMaybe<ProductReviewCreateManyInlineInput>;
   slug: Scalars['String'];
   thumbnail: AssetCreateOneInlineInput;
   title: Scalars['String'];
@@ -2741,10 +2753,91 @@ export enum ProductOrderByInput {
   UpdatedAtDesc = 'updatedAt_DESC'
 }
 
+export type ProductReview = Review;
+
+export type ProductReviewConnectInput = {
+  Review?: InputMaybe<ReviewConnectInput>;
+};
+
+export type ProductReviewCreateInput = {
+  Review?: InputMaybe<ReviewCreateInput>;
+};
+
+export type ProductReviewCreateManyInlineInput = {
+  /** Connect multiple existing ProductReview documents */
+  connect?: InputMaybe<Array<ProductReviewWhereUniqueInput>>;
+  /** Create and connect multiple existing ProductReview documents */
+  create?: InputMaybe<Array<ProductReviewCreateInput>>;
+};
+
+export type ProductReviewCreateOneInlineInput = {
+  /** Connect one existing ProductReview document */
+  connect?: InputMaybe<ProductReviewWhereUniqueInput>;
+  /** Create and connect one ProductReview document */
+  create?: InputMaybe<ProductReviewCreateInput>;
+};
+
+export type ProductReviewUpdateInput = {
+  Review?: InputMaybe<ReviewUpdateInput>;
+};
+
+export type ProductReviewUpdateManyInlineInput = {
+  /** Connect multiple existing ProductReview documents */
+  connect?: InputMaybe<Array<ProductReviewConnectInput>>;
+  /** Create and connect multiple ProductReview documents */
+  create?: InputMaybe<Array<ProductReviewCreateInput>>;
+  /** Delete multiple ProductReview documents */
+  delete?: InputMaybe<Array<ProductReviewWhereUniqueInput>>;
+  /** Disconnect multiple ProductReview documents */
+  disconnect?: InputMaybe<Array<ProductReviewWhereUniqueInput>>;
+  /** Override currently-connected documents with multiple existing ProductReview documents */
+  set?: InputMaybe<Array<ProductReviewWhereUniqueInput>>;
+  /** Update multiple ProductReview documents */
+  update?: InputMaybe<Array<ProductReviewUpdateWithNestedWhereUniqueInput>>;
+  /** Upsert multiple ProductReview documents */
+  upsert?: InputMaybe<Array<ProductReviewUpsertWithNestedWhereUniqueInput>>;
+};
+
+export type ProductReviewUpdateManyWithNestedWhereInput = {
+  Review?: InputMaybe<ReviewUpdateManyWithNestedWhereInput>;
+};
+
+export type ProductReviewUpdateOneInlineInput = {
+  /** Connect existing ProductReview document */
+  connect?: InputMaybe<ProductReviewWhereUniqueInput>;
+  /** Create and connect one ProductReview document */
+  create?: InputMaybe<ProductReviewCreateInput>;
+  /** Delete currently connected ProductReview document */
+  delete?: InputMaybe<Scalars['Boolean']>;
+  /** Disconnect currently connected ProductReview document */
+  disconnect?: InputMaybe<Scalars['Boolean']>;
+  /** Update single ProductReview document */
+  update?: InputMaybe<ProductReviewUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single ProductReview document */
+  upsert?: InputMaybe<ProductReviewUpsertWithNestedWhereUniqueInput>;
+};
+
+export type ProductReviewUpdateWithNestedWhereUniqueInput = {
+  Review?: InputMaybe<ReviewUpdateWithNestedWhereUniqueInput>;
+};
+
+export type ProductReviewUpsertWithNestedWhereUniqueInput = {
+  Review?: InputMaybe<ReviewUpsertWithNestedWhereUniqueInput>;
+};
+
+export type ProductReviewWhereInput = {
+  Review?: InputMaybe<ReviewWhereInput>;
+};
+
+export type ProductReviewWhereUniqueInput = {
+  Review?: InputMaybe<ReviewWhereUniqueInput>;
+};
+
 export type ProductUpdateInput = {
   description?: InputMaybe<Scalars['String']>;
   longDescription?: InputMaybe<Scalars['String']>;
   price?: InputMaybe<Scalars['Int']>;
+  reviews?: InputMaybe<ProductReviewUpdateManyInlineInput>;
   slug?: InputMaybe<Scalars['String']>;
   thumbnail?: InputMaybe<AssetUpdateOneInlineInput>;
   title?: InputMaybe<Scalars['String']>;
@@ -3372,6 +3465,7 @@ export type Review = Node & {
   /** The unique identifier */
   id: Scalars['ID'];
   name: Scalars['String'];
+  product?: Maybe<Product>;
   /** The time the document was published. Null on documents in draft stage. */
   publishedAt?: Maybe<Scalars['DateTime']>;
   /** User that last published this document */
@@ -3404,6 +3498,11 @@ export type ReviewHistoryArgs = {
   limit?: Scalars['Int'];
   skip?: Scalars['Int'];
   stageOverride?: InputMaybe<Stage>;
+};
+
+
+export type ReviewProductArgs = {
+  locales?: InputMaybe<Array<Locale>>;
 };
 
 
@@ -3448,6 +3547,7 @@ export type ReviewCreateInput = {
   createdAt?: InputMaybe<Scalars['DateTime']>;
   email: Scalars['String'];
   name: Scalars['String'];
+  product?: InputMaybe<ProductCreateOneInlineInput>;
   rating: Scalars['Float'];
   review: Scalars['String'];
   updatedAt?: InputMaybe<Scalars['DateTime']>;
@@ -3562,6 +3662,7 @@ export type ReviewManyWhereInput = {
   name_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
   name_starts_with?: InputMaybe<Scalars['String']>;
+  product?: InputMaybe<ProductWhereInput>;
   publishedAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -3655,6 +3756,7 @@ export enum ReviewOrderByInput {
 export type ReviewUpdateInput = {
   email?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
+  product?: InputMaybe<ProductUpdateOneInlineInput>;
   rating?: InputMaybe<Scalars['Float']>;
   review?: InputMaybe<Scalars['String']>;
 };
@@ -3818,6 +3920,7 @@ export type ReviewWhereInput = {
   name_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
   name_starts_with?: InputMaybe<Scalars['String']>;
+  product?: InputMaybe<ProductWhereInput>;
   publishedAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -5445,7 +5548,23 @@ export type GetProductsSlugsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetProductsSlugsQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', slug: string }> };
 
+export type GetReviewsByProductSlugQueryVariables = Exact<{
+  slug: Scalars['String'];
+}>;
 
+
+export type GetReviewsByProductSlugQuery = { __typename?: 'Query', product?: { __typename?: 'Product', reviews: Array<{ __typename?: 'Review', id: string, name: string, review: string, rating: number }> } | null };
+
+export type ReviewContentFragment = { __typename?: 'Review', id: string, name: string, review: string, rating: number };
+
+export const ReviewContentFragmentDoc = gql`
+    fragment reviewContent on Review {
+  id
+  name
+  review
+  rating
+}
+    `;
 export const CreateOrderDocument = gql`
     mutation CreateOrder($order: OrderCreateInput!) {
   createOrder(data: $order) {
@@ -5629,3 +5748,40 @@ export function useGetProductsSlugsLazyQuery(baseOptions?: Apollo.LazyQueryHookO
 export type GetProductsSlugsQueryHookResult = ReturnType<typeof useGetProductsSlugsQuery>;
 export type GetProductsSlugsLazyQueryHookResult = ReturnType<typeof useGetProductsSlugsLazyQuery>;
 export type GetProductsSlugsQueryResult = Apollo.QueryResult<GetProductsSlugsQuery, GetProductsSlugsQueryVariables>;
+export const GetReviewsByProductSlugDocument = gql`
+    query GetReviewsByProductSlug($slug: String!) {
+  product(where: {slug: $slug}) {
+    reviews {
+      ...reviewContent
+    }
+  }
+}
+    ${ReviewContentFragmentDoc}`;
+
+/**
+ * __useGetReviewsByProductSlugQuery__
+ *
+ * To run a query within a React component, call `useGetReviewsByProductSlugQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetReviewsByProductSlugQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetReviewsByProductSlugQuery({
+ *   variables: {
+ *      slug: // value for 'slug'
+ *   },
+ * });
+ */
+export function useGetReviewsByProductSlugQuery(baseOptions: Apollo.QueryHookOptions<GetReviewsByProductSlugQuery, GetReviewsByProductSlugQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetReviewsByProductSlugQuery, GetReviewsByProductSlugQueryVariables>(GetReviewsByProductSlugDocument, options);
+      }
+export function useGetReviewsByProductSlugLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetReviewsByProductSlugQuery, GetReviewsByProductSlugQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetReviewsByProductSlugQuery, GetReviewsByProductSlugQueryVariables>(GetReviewsByProductSlugDocument, options);
+        }
+export type GetReviewsByProductSlugQueryHookResult = ReturnType<typeof useGetReviewsByProductSlugQuery>;
+export type GetReviewsByProductSlugLazyQueryHookResult = ReturnType<typeof useGetReviewsByProductSlugLazyQuery>;
+export type GetReviewsByProductSlugQueryResult = Apollo.QueryResult<GetReviewsByProductSlugQuery, GetReviewsByProductSlugQueryVariables>;

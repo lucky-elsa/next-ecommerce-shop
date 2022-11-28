@@ -1,4 +1,4 @@
-import { Input } from "./Input";
+import { Input } from "./components/Input";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { checkoutFormSchema } from "@/utils/validations/checkoutFormSchema";

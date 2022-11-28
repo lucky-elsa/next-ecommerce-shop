@@ -16393,6 +16393,111 @@
             "deprecationReason": null
           },
           {
+            "name": "reviews",
+            "description": null,
+            "args": [
+              {
+                "name": "after",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "before",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "first",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "last",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "locales",
+                "description": "Allows to optionally override locale filtering behaviour in the query's subtree.\n\nNote that `reviews` is a model without localized fields and will not be affected directly by this argument, however the locales will be passed on to any relational fields in the query's subtree for filtering.\nFor related models with localized fields in the query's subtree, the first locale matching the provided list of locales will be returned, entries with non matching locales will be filtered out.\n\nThis argument will overwrite any existing locale filtering defined in the query's tree for the subtree.",
+                "type": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "ENUM",
+                      "name": "Locale",
+                      "ofType": null
+                    }
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "skip",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "UNION",
+                    "name": "ProductReview",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "scheduledIn",
             "description": null,
             "args": [
@@ -16814,6 +16919,18 @@
                 "name": "Int",
                 "ofType": null
               }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "reviews",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ProductReviewCreateManyInlineInput",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -18392,6 +18509,526 @@
         "possibleTypes": null
       },
       {
+        "kind": "UNION",
+        "name": "ProductReview",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": [
+          {
+            "kind": "OBJECT",
+            "name": "Review",
+            "ofType": null
+          }
+        ]
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "ProductReviewConnectInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "Review",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ReviewConnectInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "ProductReviewCreateInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "Review",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ReviewCreateInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "ProductReviewCreateManyInlineInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "connect",
+            "description": "Connect multiple existing ProductReview documents",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "ProductReviewWhereUniqueInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "create",
+            "description": "Create and connect multiple existing ProductReview documents",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "ProductReviewCreateInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "ProductReviewCreateOneInlineInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "connect",
+            "description": "Connect one existing ProductReview document",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ProductReviewWhereUniqueInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "create",
+            "description": "Create and connect one ProductReview document",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ProductReviewCreateInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "ProductReviewUpdateInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "Review",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ReviewUpdateInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "ProductReviewUpdateManyInlineInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "connect",
+            "description": "Connect multiple existing ProductReview documents",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "ProductReviewConnectInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "create",
+            "description": "Create and connect multiple ProductReview documents",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "ProductReviewCreateInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "delete",
+            "description": "Delete multiple ProductReview documents",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "ProductReviewWhereUniqueInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "disconnect",
+            "description": "Disconnect multiple ProductReview documents",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "ProductReviewWhereUniqueInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "set",
+            "description": "Override currently-connected documents with multiple existing ProductReview documents",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "ProductReviewWhereUniqueInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "update",
+            "description": "Update multiple ProductReview documents",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "ProductReviewUpdateWithNestedWhereUniqueInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "upsert",
+            "description": "Upsert multiple ProductReview documents",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "ProductReviewUpsertWithNestedWhereUniqueInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "ProductReviewUpdateManyWithNestedWhereInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "Review",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ReviewUpdateManyWithNestedWhereInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "ProductReviewUpdateOneInlineInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "connect",
+            "description": "Connect existing ProductReview document",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ProductReviewWhereUniqueInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "create",
+            "description": "Create and connect one ProductReview document",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ProductReviewCreateInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "delete",
+            "description": "Delete currently connected ProductReview document",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "disconnect",
+            "description": "Disconnect currently connected ProductReview document",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "update",
+            "description": "Update single ProductReview document",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ProductReviewUpdateWithNestedWhereUniqueInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "upsert",
+            "description": "Upsert single ProductReview document",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ProductReviewUpsertWithNestedWhereUniqueInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "ProductReviewUpdateWithNestedWhereUniqueInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "Review",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ReviewUpdateWithNestedWhereUniqueInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "ProductReviewUpsertWithNestedWhereUniqueInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "Review",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ReviewUpsertWithNestedWhereUniqueInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "ProductReviewWhereInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "Review",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ReviewWhereInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "ProductReviewWhereUniqueInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "Review",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ReviewWhereUniqueInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
         "kind": "INPUT_OBJECT",
         "name": "ProductUpdateInput",
         "description": null,
@@ -18427,6 +19064,18 @@
             "type": {
               "kind": "SCALAR",
               "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "reviews",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ProductReviewUpdateManyInlineInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -20447,7 +21096,7 @@
                     "ofType": null
                   }
                 },
-                "defaultValue": "PUBLISHED",
+                "defaultValue": "DRAFT",
                 "isDeprecated": false,
                 "deprecationReason": null
               },
@@ -20617,7 +21266,7 @@
                     "ofType": null
                   }
                 },
-                "defaultValue": "PUBLISHED",
+                "defaultValue": "DRAFT",
                 "isDeprecated": false,
                 "deprecationReason": null
               },
@@ -20766,7 +21415,7 @@
                     "ofType": null
                   }
                 },
-                "defaultValue": "PUBLISHED",
+                "defaultValue": "DRAFT",
                 "isDeprecated": false,
                 "deprecationReason": null
               },
@@ -20851,7 +21500,7 @@
                     "ofType": null
                   }
                 },
-                "defaultValue": "PUBLISHED",
+                "defaultValue": "DRAFT",
                 "isDeprecated": false,
                 "deprecationReason": null
               }
@@ -20904,7 +21553,7 @@
                     "ofType": null
                   }
                 },
-                "defaultValue": "PUBLISHED",
+                "defaultValue": "DRAFT",
                 "isDeprecated": false,
                 "deprecationReason": null
               },
@@ -21074,7 +21723,7 @@
                     "ofType": null
                   }
                 },
-                "defaultValue": "PUBLISHED",
+                "defaultValue": "DRAFT",
                 "isDeprecated": false,
                 "deprecationReason": null
               },
@@ -21223,7 +21872,7 @@
                     "ofType": null
                   }
                 },
-                "defaultValue": "PUBLISHED",
+                "defaultValue": "DRAFT",
                 "isDeprecated": false,
                 "deprecationReason": null
               },
@@ -21292,7 +21941,7 @@
                     "ofType": null
                   }
                 },
-                "defaultValue": "PUBLISHED",
+                "defaultValue": "DRAFT",
                 "isDeprecated": false,
                 "deprecationReason": null
               },
@@ -21462,7 +22111,7 @@
                     "ofType": null
                   }
                 },
-                "defaultValue": "PUBLISHED",
+                "defaultValue": "DRAFT",
                 "isDeprecated": false,
                 "deprecationReason": null
               },
@@ -21611,7 +22260,7 @@
                     "ofType": null
                   }
                 },
-                "defaultValue": "PUBLISHED",
+                "defaultValue": "DRAFT",
                 "isDeprecated": false,
                 "deprecationReason": null
               },
@@ -21680,7 +22329,7 @@
                     "ofType": null
                   }
                 },
-                "defaultValue": "PUBLISHED",
+                "defaultValue": "DRAFT",
                 "isDeprecated": false,
                 "deprecationReason": null
               },
@@ -21850,7 +22499,7 @@
                     "ofType": null
                   }
                 },
-                "defaultValue": "PUBLISHED",
+                "defaultValue": "DRAFT",
                 "isDeprecated": false,
                 "deprecationReason": null
               },
@@ -21999,7 +22648,7 @@
                     "ofType": null
                   }
                 },
-                "defaultValue": "PUBLISHED",
+                "defaultValue": "DRAFT",
                 "isDeprecated": false,
                 "deprecationReason": null
               },
@@ -22068,7 +22717,7 @@
                     "ofType": null
                   }
                 },
-                "defaultValue": "PUBLISHED",
+                "defaultValue": "DRAFT",
                 "isDeprecated": false,
                 "deprecationReason": null
               },
@@ -22209,7 +22858,7 @@
                     "ofType": null
                   }
                 },
-                "defaultValue": "PUBLISHED",
+                "defaultValue": "DRAFT",
                 "isDeprecated": false,
                 "deprecationReason": null
               },
@@ -22358,7 +23007,7 @@
                     "ofType": null
                   }
                 },
-                "defaultValue": "PUBLISHED",
+                "defaultValue": "DRAFT",
                 "isDeprecated": false,
                 "deprecationReason": null
               },
@@ -22427,7 +23076,7 @@
                     "ofType": null
                   }
                 },
-                "defaultValue": "PUBLISHED",
+                "defaultValue": "DRAFT",
                 "isDeprecated": false,
                 "deprecationReason": null
               },
@@ -22568,7 +23217,7 @@
                     "ofType": null
                   }
                 },
-                "defaultValue": "PUBLISHED",
+                "defaultValue": "DRAFT",
                 "isDeprecated": false,
                 "deprecationReason": null
               },
@@ -22717,7 +23366,7 @@
                     "ofType": null
                   }
                 },
-                "defaultValue": "PUBLISHED",
+                "defaultValue": "DRAFT",
                 "isDeprecated": false,
                 "deprecationReason": null
               },
@@ -22786,7 +23435,7 @@
                     "ofType": null
                   }
                 },
-                "defaultValue": "PUBLISHED",
+                "defaultValue": "DRAFT",
                 "isDeprecated": false,
                 "deprecationReason": null
               },
@@ -22927,7 +23576,7 @@
                     "ofType": null
                   }
                 },
-                "defaultValue": "PUBLISHED",
+                "defaultValue": "DRAFT",
                 "isDeprecated": false,
                 "deprecationReason": null
               },
@@ -23076,7 +23725,7 @@
                     "ofType": null
                   }
                 },
-                "defaultValue": "PUBLISHED",
+                "defaultValue": "DRAFT",
                 "isDeprecated": false,
                 "deprecationReason": null
               },
@@ -23534,6 +24183,39 @@
             "deprecationReason": null
           },
           {
+            "name": "product",
+            "description": null,
+            "args": [
+              {
+                "name": "locales",
+                "description": "Allows to optionally override locale filtering behaviour in the query's subtree.\n\nNote that `product` is a model without localized fields and will not be affected directly by this argument, however the locales will be passed on to any relational fields in the query's subtree for filtering.\nFor related models with localized fields in the query's subtree, the first locale matching the provided list of locales will be returned, entries with non matching locales will be filtered out.\n\nThis argument will overwrite any existing locale filtering defined in the query's tree for the subtree.",
+                "type": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "ENUM",
+                      "name": "Locale",
+                      "ofType": null
+                    }
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Product",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "publishedAt",
             "description": "The time the document was published. Null on documents in draft stage.",
             "args": [],
@@ -23955,6 +24637,18 @@
                 "name": "String",
                 "ofType": null
               }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "product",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ProductCreateOneInlineInput",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -24753,6 +25447,18 @@
             "deprecationReason": null
           },
           {
+            "name": "product",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ProductWhereInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "publishedAt",
             "description": null,
             "type": {
@@ -25388,6 +26094,18 @@
             "type": {
               "kind": "SCALAR",
               "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "product",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ProductUpdateOneInlineInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -26519,6 +27237,18 @@
             "type": {
               "kind": "SCALAR",
               "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "product",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ProductWhereInput",
               "ofType": null
             },
             "defaultValue": null,
