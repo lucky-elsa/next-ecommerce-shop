@@ -7,6 +7,7 @@ import { FormTypes } from "types";
 import { Textarea } from "../form/components/Textarea";
 import {
   CreateReviewDocument,
+  GetReviewsByProductSlugDocument,
   useCreateReviewMutation,
 } from "generated/graphql";
 
@@ -23,7 +24,14 @@ export const ProductReviewForm = ({ productId }: AddReviewFormProps) => {
   } = useForm<FormTypes>({
     resolver: yupResolver(productReviewFormSchema),
   });
-  const [createReview, { error }] = useCreateReviewMutation();
+  const [createReview, { error }] = useCreateReviewMutation({
+    refetchQueries: [
+      {
+        query: GetReviewsByProductSlugDocument,
+        variables: { slug: productId },
+      },
+    ],
+  });
 
   const onSubmit = async (reviewData: FormTypes) => {
     const review = {
