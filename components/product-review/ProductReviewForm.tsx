@@ -8,6 +8,7 @@ import { Textarea } from "../form/components/Textarea";
 import {
   CreateReviewDocument,
   GetReviewsByProductSlugDocument,
+  GetReviewsByProductSlugQuery,
   useCreateReviewMutation,
 } from "generated/graphql";
 
@@ -25,12 +26,46 @@ export const ProductReviewForm = ({ productId }: AddReviewFormProps) => {
     resolver: yupResolver(productReviewFormSchema),
   });
   const [createReview, { error }] = useCreateReviewMutation({
-    refetchQueries: [
-      {
+    // refetchQueries: [
+    //   {
+    //     query: GetReviewsByProductSlugDocument,
+    //     variables: { slug: productId },
+    //   },
+    // ],
+    update(cache, result) {
+      result.data?.createReview;
+      const originalReviewsQuery =
+        cache.readQuery<GetReviewsByProductSlugQuery>({
+          query: GetReviewsByProductSlugDocument,
+          variables: { slug: productId },
+        });
+
+      if (
+        !originalReviewsQuery ||
+        !originalReviewsQuery.product ||
+        !result.data?.createReview
+      ) {
+        // @todo
+        return;
+      }
+
+      const newReviewsQuery = {
+        ...originalReviewsQuery,
+        product: {
+          ...originalReviewsQuery.product,
+          reviews: [
+            ...originalReviewsQuery.product.reviews,
+            result.data.createReview,
+          ],
+        },
+      };
+
+      cache.writeQuery({
         query: GetReviewsByProductSlugDocument,
         variables: { slug: productId },
-      },
-    ],
+        data: newReviewsQuery,
+      });
+    },
   });
 
   const onSubmit = async (reviewData: FormTypes) => {
@@ -45,6 +80,16 @@ export const ProductReviewForm = ({ productId }: AddReviewFormProps) => {
       mutation: CreateReviewDocument,
       variables: {
         review: review,
+      },
+      optimisticResponse: {
+        __typename: "Mutation",
+        createReview: {
+          __typename: "Review",
+          id: (-Math.random()).toString(),
+          name: reviewData.name,
+          rating: Number(reviewData.rating),
+          review: reviewData.review,
+        },
       },
     });
     if (error) alert("Something when wrong. Please try again.");
