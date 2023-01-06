@@ -1,8 +1,62 @@
 import { useCartState } from "context/CartContext";
 import Link from "next/link";
+import { loadStripe } from "@stripe/stripe-js";
+import Stripe from "stripe";
+
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
+);
+
+const CartPage = () => {
+  const cartState = useCartState();
+
+  const pay = async () => {
+    const stripe = await stripePromise;
+
+    if (!stripe) {
+      throw new Error("Something went wrong");
+    }
+
+    const res = await fetch("/api/checkout", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(
+        cartState.items?.map((cartItem) => {
+          return {
+            price_data: {
+              currency: "GBP",
+              unit_amount: Math.round(cartItem.price * 100),
+              product_data: {
+                name: cartItem.title,
+              },
+            },
+            quantity: cartItem.count,
+          };
+        })
+      ),
+    });
+
+    const { session }: { session: Stripe.Response<Stripe.Checkout.Session> } =
+      await res.json();
+
+    await stripe.redirectToCheckout({ sessionId: session.id });
+  };
+
+  return (
+    <div className="max-w-5xl mx-auto w-full p4">
+      <div className="grid grid-cols-3 gap-8">
+        <CartContent />
+        <CartSummary itemsCount={cartState?.items?.length ?? 0} pay={pay} />
+      </div>
+    </div>
+  );
+};
 
 const CartContent = () => {
   const cartState = useCartState();
+
   return (
     <div className="col-span-2">
       <ul className="divide-y divide-gray-200">
@@ -46,30 +100,28 @@ const CartContent = () => {
   );
 };
 
-const CartSummary = () => {
-  const cartState = useCartState();
+type CartSummaryProps = {
+  itemsCount: number;
+  pay: () => void;
+};
+
+const CartSummary = ({ itemsCount, pay }: CartSummaryProps) => {
   return (
     <div>
       <p>Cart Summary</p>
-      <div>Items total: {cartState?.items?.length}</div>
+      <div>Items total: {itemsCount}</div>
+      <br></br>
       <Link href="/checkout">
         <a className="m-4 bg-transparent hover:bg-color-secondary text-color-primary font-semibold hover:text-white py-2 px-4 border border-color-secondary hover:border-transparent rounded">
           Checkout
         </a>
       </Link>
-    </div>
-  );
-};
-
-const CartPage = () => {
-  const cartState = useCartState();
-
-  return (
-    <div className="max-w-5xl mx-auto w-full p4">
-      <div className="grid grid-cols-3 gap-8">
-        <CartContent />
-        <CartSummary />
-      </div>
+      <button
+        className="m-4 bg-transparent hover:bg-color-secondary text-color-primary font-semibold hover:text-white py-2 px-4 border border-color-secondary hover:border-transparent rounded"
+        onClick={pay}
+      >
+        Confirm order
+      </button>
     </div>
   );
 };
