@@ -11,6 +11,7 @@ import { CartStateContextProvider } from "context/CartContext";
 const queryClient = new QueryClient();
 
 function MyApp({ Component, pageProps }: AppProps) {
+  console.log("test push");
   return (
     <ApolloProvider client={apolloClient}>
       <CartStateContextProvider>
